@@ -1,6 +1,6 @@
 {
   "name": "epip-log",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
@@ -12,19 +12,19 @@
     "pub": "npm run build && npm run up-version && npm publish"
   },
   "dependencies": {
-    "@nestjs/common": "^9.0.0",
-    "@nestjs/config": "^2.0.0",
-    "@nestjs/core": "^9.0.0",
-    "@nestjs/jwt": "^10.0.2",
-    "@nestjs/mongoose": "^9.2.1",
-    "@nestjs/swagger": "^5.2.1",
-    "mongoose": "^6.2.10",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",
     "typescript-rtti": "^0.7.3"
   },
   "devDependencies": {
+    "mongoose": "^6.2.10",
+    "@nestjs/common": "^9.0.0",
+    "@nestjs/config": "^2.0.0",
+    "@nestjs/core": "^9.0.0",
+    "@nestjs/jwt": "^10.0.2",
+    "@nestjs/mongoose": "^9.2.1",
+    "@nestjs/swagger": "^5.2.1",
     "@nestjs/cli": "^9.0.0",
     "@nestjs/schematics": "^9.0.0",
     "@nestjs/testing": "^9.0.0",
