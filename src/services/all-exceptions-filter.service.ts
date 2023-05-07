@@ -56,13 +56,13 @@ export class AllExceptionsFilter implements ExceptionFilter {
             },
         } as LogEntity;
 
-        try {
-            const data = await this.log.create(responseBody)
-            responseBody.response.code = (data as any)._id;
-        } catch (e: any) {
-            console.error(e)
-        }
+        // try {
+        //     const data = await this.log.create(responseBody)
+        //     responseBody.response.code = (data as any)._id;
+        // } catch (e: any) {
+        //     console.error(e)
+        // }
 
-        httpAdapter.reply(ctx.getResponse(), responseBody.response, httpStatus);
+        httpAdapter.reply(ctx.getResponse(), responseBody, httpStatus);
     }
 }

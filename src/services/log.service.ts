@@ -11,7 +11,8 @@ export class LogService {
 
     async create(body: LogEntity): Promise<LogEntity> {
         const createdCat = new this.model(body);
-        return createdCat.save();
+        // return createdCat.save();
+        return ;
     }
 
     async findLog(query:any): Promise<LogEntity[]> {
