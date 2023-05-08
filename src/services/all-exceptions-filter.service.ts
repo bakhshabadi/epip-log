@@ -30,39 +30,43 @@ export class AllExceptionsFilter implements ExceptionFilter {
     async catch(exception: unknown, host: ArgumentsHost): Promise<void> {
         // In certain situations `httpAdapter` might not be available in the
         // constructor method, thus we should resolve it here.
-        const { httpAdapter } = this.httpAdapterHost;
+        try {
+            const { httpAdapter } = this.httpAdapterHost;
 
-        const ctx = host.switchToHttp();
+            const ctx = host.switchToHttp();
 
-        const httpStatus =
-            exception instanceof HttpException
-                ? exception.getStatus()
-                : HttpStatus.INTERNAL_SERVER_ERROR;
+            const httpStatus =
+                exception instanceof HttpException
+                    ? exception.getStatus()
+                    : HttpStatus.INTERNAL_SERVER_ERROR;
 
-        const responseBody = {
-            timestamp: new Date(),
-            codeDetail: getDetailsCall(exception),
-            request: {
-                url: httpAdapter.getRequestUrl(ctx.getRequest()),
-                method: httpAdapter.getRequestMethod(ctx.getRequest()),
-                body: ctx.getRequest().body,
-                query: ctx.getRequest().query,
-                headers: ctx.getRequest().headers,
-                user: this.getUserFromToken(ctx.getRequest().headers["authorization"])
-            },
-            response: {
-                status: httpStatus,
-                message: (exception as any).message
-            },
-        } as LogEntity;
+            const responseBody = {
+                timestamp: new Date(),
+                codeDetail: getDetailsCall(exception),
+                request: {
+                    url: httpAdapter.getRequestUrl(ctx.getRequest()),
+                    method: httpAdapter.getRequestMethod(ctx.getRequest()),
+                    body: ctx.getRequest().body,
+                    query: ctx.getRequest().query,
+                    headers: ctx.getRequest().headers,
+                    user: this.getUserFromToken(ctx.getRequest().headers["authorization"])
+                },
+                response: {
+                    status: httpStatus,
+                    message: (exception as any).message
+                },
+            } as LogEntity;
 
-        // try {
-        //     const data = await this.log.create(responseBody)
-        //     responseBody.response.code = (data as any)._id;
-        // } catch (e: any) {
-        //     console.error(e)
-        // }
+            // try {
+            //     const data = await this.log.create(responseBody)
+            //     responseBody.response.code = (data as any)._id;
+            // } catch (e: any) {
+            //     console.error(e)
+            // }
 
-        httpAdapter.reply(ctx.getResponse(), responseBody, httpStatus);
+            httpAdapter.reply(ctx.getResponse(), responseBody, httpStatus);
+        } catch (err: any) {
+            console.log(err)
+        }
     }
 }

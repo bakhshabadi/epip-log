@@ -6,8 +6,8 @@ export const getDetailsCall = function (err) {
     var stack = err.stack;
 
     return (stack as any).map(f => {
-        let fileName = f.getFileName().split("\\dist\\");
-        if (fileName.length) {
+        let fileName = f.getFileName()?.split("\\dist\\");
+        if (fileName?.length) {
             fileName = fileName[1];
         } else {
             fileName = f.getFileName()
