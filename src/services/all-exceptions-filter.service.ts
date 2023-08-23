@@ -53,7 +53,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
                 },
                 response: {
                     status: httpStatus,
-                    message: (exception as any).message
+                    message: (exception as any).response?(exception as any).response.message:(exception as any).message
                 },
             } as LogEntity;
 
