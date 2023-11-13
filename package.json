@@ -1,8 +1,8 @@
 {
   "name": "epip-log",
-  "version": "1.0.17",
+  "version": "1.0.18",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "up-version": "npm version patch --force",
     "clean": "rmdir /q /s dist",
